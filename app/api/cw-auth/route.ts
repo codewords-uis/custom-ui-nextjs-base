@@ -72,6 +72,13 @@ export async function GET(request: NextRequest) {
       httpOnly: true,
       secure: true,
       sameSite: "none",
+      // CHIPS: the preview is shown inside an iframe on the CodeWords app, so
+      // this is a third-party cookie. Without `Partitioned` modern browsers
+      // drop it (third-party cookie blocking), the proxy never sees cw_preview,
+      // and the auth handshake loops until it falls back to the (unframable)
+      // AuthKit login page. Partitioned scopes the cookie to this top-level
+      // site so it persists across the redirect.
+      partitioned: true,
       path: "/",
       maxAge: 60 * 60 * 24,
     });
