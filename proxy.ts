@@ -8,13 +8,14 @@ const ALLOWED_ORIGINS = [
 ];
 
 const FRAME_ANCESTORS =
-  "'self' *.agemo.ai *.codewords.run *.codewords.click *.ngrok.app *.ngrok.dev localhost:3001";
+  "'self' *.agemo.ai *.codewords.ai *.codewords.run *.codewords.click *.ngrok.app *.ngrok.dev localhost:3001";
 
 const isAllowedOrigin = (origin: string | null): boolean => {
   if (!origin) return false;
   if (ALLOWED_ORIGINS.includes(origin)) return true;
   if (origin.endsWith(".ngrok.app")) return true;
   if (origin.endsWith(".ngrok.dev")) return true;
+  if (origin.endsWith(".codewords.ai")) return true;
   if (origin.endsWith(".codewords.run")) return true;
   if (origin.endsWith(".codewords.click")) return true;
   return false;
